@@ -87,9 +87,13 @@ public class UserRestController {
 
     @DeleteMapping("/delete")
     public HttpStatus deleteStudent(@RequestParam String uname) {
-        userServices.deleteUser(uname);
-        deleteUser(uname);
-        return HttpStatus.OK;
+        try{
+            userServices.deleteUser(uname);
+            deleteUser(uname);
+            return HttpStatus.OK;
+        }catch (Exception e){
+            return HttpStatus.BAD_REQUEST;
+        }
     }
 
     public void deleteUser(String username){

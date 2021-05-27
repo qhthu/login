@@ -82,7 +82,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/", "/user", "/logout", "/new").permitAll();
+        http.csrf().disable().authorizeRequests().antMatchers("/", "/user", "/logout", "/new", "/sendemail").permitAll();
         http.csrf().disable().authorizeRequests().antMatchers("/list", "/getuser", "/delete")
                 .permitAll().anyRequest().authenticated()
                 .and().exceptionHandling().and().sessionManagement()

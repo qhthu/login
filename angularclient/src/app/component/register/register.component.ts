@@ -31,10 +31,18 @@ export class RegisterComponent {
   }
   onSubmit() {
     this.user.passwd = shajs.sha256().update(this.user.passwd).digest("hex");
-    this.userService.save(this.user).subscribe(result => this.gotoLogin());
+    let resp = this.userService.sendMail(this.user.email);
+    resp.subscribe(data =>{
+      console.log(data);
+      if( data == "OK"){
+        this.userService.save(this.user).subscribe(data => this.gotoFinish());
+        // this.router.navigate(['/finish']);
+      }
+    })
+
   }
-  gotoLogin() {
-    this.router.navigate(['/login']);
+  gotoFinish() {
+    this.router.navigate(['/finish']);
   }
 
 }

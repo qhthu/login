@@ -40,9 +40,16 @@ export class UserComponent implements OnInit {
 
 
   deleteUser(username: string) {
-    this.service.delete(username);
-    this.getData();
-    alert("Xóa thành công!!");
+    let resp = this.service.delete(username);
+    resp.subscribe(data =>{
+      if(data == "OK"){
+        this.getData();
+        alert("Xóa thành công!!");
+      }else{
+        alert("Xóa không thành công!!");
+      }
+    })
+
   }
 
   logout() {

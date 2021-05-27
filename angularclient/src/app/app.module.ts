@@ -15,6 +15,7 @@ import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {CookieService} from "angular2-cookie/services/cookies.service";
+import { FinishComponent } from './component/finish/finish.component';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -33,7 +34,8 @@ export class XhrInterceptor implements HttpInterceptor {
     AppComponent,
     UserComponent,
     UserFormComponent,
-    RegisterComponent
+    RegisterComponent,
+    FinishComponent
   ],
     imports: [
         BrowserModule,

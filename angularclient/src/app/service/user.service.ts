@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../model/user'
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
 import {BehaviorSubject, Observable} from "rxjs";
 import {CookieService} from "angular2-cookie/services/cookies.service";
 
@@ -83,7 +83,6 @@ export class UserService {
   }
 
   public findAll(): Observable<any> {
-    console.log(this.getToken());
     let tokenStr = 'Bearer ' + this.getToken();
     const headers = new HttpHeaders().set('Authorization', tokenStr);
     return this.httpClient.get<User[]>(this.usersUrl + "/list", {headers, responseType: 'json' } );
@@ -93,10 +92,14 @@ export class UserService {
     return this.httpClient.post<User>(this.usersUrl+"/new", user);
   }
 
+  public sendMail(mail: string) {
+    return this.httpClient.get<string>("http://localhost:8080/sendemail?email="+mail);
+  }
+
   public delete(username: string){
     let tokenStr = 'Bearer ' + this.getToken();
     const headers = new HttpHeaders().set('Authorization', tokenStr);
-    return this.httpClient.delete<User>("http://localhost:8080/delete?uname="+username, {headers, responseType: 'json' });
+    return this.httpClient.delete("http://localhost:8080/delete?uname="+username, {headers, responseType: 'json' });
   }
 
 }
